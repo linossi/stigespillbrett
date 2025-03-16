@@ -1,43 +1,74 @@
-import pygame as pg
+# Importerer pygame
+import pygame
 
-pg.init()
+# Initialiser Pygame
+pygame.init()
 
-BRETTBREDDE = 700
-BRETTHOYDE = 700
+# Konstanter
+BREDDE, HOYDE = 500, 500
+RADER, KOLONNER = 10, 10
+RUTESTORRELSE = BREDDE // KOLONNER
 
-vindu = pg.display.set_mode([BRETTBREDDE, BRETTHOYDE])
+# Farger
+HVIT = (255, 255, 255)
+SVART = (0, 0, 0)
+ROD = (255, 0, 0)
+GRONN = (0, 255, 0)
+MULBERRY = (197, 75, 140)
 
-print(type(vindu))
 
-# Angir hvilken skrifttype og tekststørrelse vi vil bruke på tekst
-font = pg.font.SysFont("Arial", 24)
+# Opprett vindu
+skjerm = pygame.display.set_mode((BREDDE, HOYDE))
+pygame.display.set_caption("Stigespill")
 
-fortsett = True
-while fortsett:
+# Font
+tallFont = pygame.font.Font(None, 24)
+tekstFont = pygame.font.Font(None, 19)
 
-    # Sjekker om brukeren har lukket vinduet
-    for event in pg.event.get():
-        if event.type == pg.QUIT:
-            fortsett = False
+def tegnBrett():
+    skjerm.fill(HVIT)
+    
+    # Tegn rutenett og nummer
+    for rad in range(RADER):
+        for kol in range(KOLONNER):
+            rect = pygame.Rect(kol * RUTESTORRELSE, rad * RUTESTORRELSE, RUTESTORRELSE, RUTESTORRELSE)
+            pygame.draw.rect(skjerm, SVART, rect, 1)
 
-    # Farger bakgrunnen hvit
-    vindu.fill((255, 255, 255))
+            # Rutenummer
+            rutenummer = (RADER - 1 - rad) * KOLONNER + (kol + 1)
+            tekst = tallFont.render(str(rutenummer), True, SVART)
+            skjerm.blit(tekst, (kol * RUTESTORRELSE + 5, rad * RUTESTORRELSE + 5))
 
-    # Tegner en sirkel
-    pg.draw.circle(vindu, (255, 0, 0), (100, 250), 50)
-    # Tegner et rektangel
-    pg.draw.rect(vindu, (0, 255, 0), (200, 250, 70, 90))
-    # Tegner en ellipse
-    pg.draw.ellipse(vindu, (0, 0, 255), (300, 250, 90, 60))
-    # Tegner en linje
-    pg.draw.line(vindu, (200, 0, 200), (400, 100), (420, 400), 5)
+    # Markér start (rute 1) og mål (rute 100)
+    pygame.draw.rect(skjerm, MULBERRY, (0, (RADER-1) * RUTESTORRELSE, RUTESTORRELSE, RUTESTORRELSE))
+    pygame.draw.rect(skjerm, MULBERRY, ((KOLONNER-1) * RUTESTORRELSE, 0, RUTESTORRELSE, RUTESTORRELSE))
 
-    # Lager en tekst i form av et bilde og legger til bildet i vinduet
-    bilde = font.render("Heisann!", True, (50, 50, 50))
-    vindu.blit(bilde, (400, 20))
+    # Skriv "START" og "SLUTT"
+    startTekst = tekstFont.render("START", True, SVART)
+    skjerm.blit(startTekst, (5, (RADER-1) * RUTESTORRELSE + 20))
 
-    # Oppdaterer alt innholdet i vinduet
-    pg.display.flip()
+    sluttTekst = tekstFont.render("SLUTT", True, SVART)
+    skjerm.blit(sluttTekst, ((KOLONNER-1) * RUTESTORRELSE + 5, 20))
 
-# Avslutter pygame
-pg.quit()
+    # Tegn stiger (grønne linjer)
+    pygame.draw.line(skjerm, GRONN, (50, 400), (150, 300), 5)   
+    pygame.draw.line(skjerm, GRONN, (350, 250), (450, 150), 5)  
+    pygame.draw.line(skjerm, GRONN, (100, 300), (200, 150), 5)  
+
+    # Tegn slanger (røde linjer)
+    pygame.draw.line(skjerm, ROD, (300, 100), (200, 200), 5)   
+    pygame.draw.line(skjerm, ROD, (400, 400), (300, 300), 5)   
+    pygame.draw.line(skjerm, ROD, (150, 50), (50, 300), 5)     
+    pygame.draw.line(skjerm, ROD, (400, 50), (100, 450), 5)     
+
+# Hovedløkke
+kjører = True
+while kjører:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            kjører = False
+
+    tegnBrett()
+    pygame.display.flip()
+
+pygame.quit()
