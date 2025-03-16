@@ -16,7 +16,6 @@ ROD = (255, 0, 0)
 GRONN = (0, 255, 0)
 MULBERRY = (197, 75, 140)
 
-
 # Opprett vindu
 skjerm = pygame.display.set_mode((BREDDE, HOYDE))
 pygame.display.set_caption("Stigespill")
@@ -43,6 +42,7 @@ def tegnBrett():
             skjerm.blit(tekst, (kol * RUTESTORRELSE + 5, rad * RUTESTORRELSE + 5))
 
     # Markér start (rute 1) og mål (rute 100)
+    # rect lager en rektangel
     pygame.draw.rect(skjerm, MULBERRY, (0, (RADER-1) * RUTESTORRELSE, RUTESTORRELSE, RUTESTORRELSE))
     pygame.draw.rect(skjerm, MULBERRY, ((KOLONNER-1) * RUTESTORRELSE, 0, RUTESTORRELSE, RUTESTORRELSE))
 
@@ -72,5 +72,6 @@ while kjører:
             kjører = False
 
     tegnBrett()
+    pygame.display.flip()
 
 pygame.quit() 
