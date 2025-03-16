@@ -1,7 +1,7 @@
 # Importerer pygame
 import pygame
 
-# Initialiser Pygame
+# Initialiser pygame
 pygame.init()
 
 # Konstanter
