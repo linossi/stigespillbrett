@@ -7,6 +7,11 @@ BRETTHOYDE = 500
 
 vindu = pg.display.set_mode([BRETTBREDDE, BRETTHOYDE])
 
+print(type(vindu))
+
+# Angir hvilken skrifttype og tekststørrelse vi vil bruke på tekst
+font = pg.font.SysFont("Arial", 24)
+
 fortsett = True
 while fortsett:
 
