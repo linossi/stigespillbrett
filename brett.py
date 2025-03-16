@@ -44,11 +44,11 @@ def tegnBrett():
     pygame.draw.rect(skjerm, MULBERRY, ((KOLONNER-1) * RUTESTORRELSE, 0, RUTESTORRELSE, RUTESTORRELSE)) # Tegner rektangel
 
     # Skriv "START" og "SLUTT"
-    startTekst = tekstFont.render("START", True, SVART) # 
-    skjerm.blit(startTekst, (5, (RADER-1) * RUTESTORRELSE + 20)) # 
+    startTekst = tekstFont.render("START", True, SVART) # Lager tekst
+    skjerm.blit(startTekst, (5, (RADER-1) * RUTESTORRELSE + 20)) # Tegner tekst
 
-    sluttTekst = tekstFont.render("SLUTT", True, SVART) # 
-    skjerm.blit(sluttTekst, ((KOLONNER-1) * RUTESTORRELSE + 5, 20)) #
+    sluttTekst = tekstFont.render("SLUTT", True, SVART) # Lager tekst
+    skjerm.blit(sluttTekst, ((KOLONNER-1) * RUTESTORRELSE + 5, 20)) # Tegner tekst
 
     # Tegn stiger (grønne linjer)
     pygame.draw.line(skjerm, GRONN, (50, 400), (150, 300), 5)   
@@ -61,14 +61,20 @@ def tegnBrett():
     pygame.draw.line(skjerm, ROD, (150, 50), (50, 300), 5)     
     pygame.draw.line(skjerm, ROD, (400, 50), (100, 450), 5)     
 
-# Hovedløkke
+# Hovedløkke som kjører til programmet lukkes
 kjører = True
 while kjører:
+    # Sjekker etter eventer, som musetrykk eller tastetrykk
     for event in pygame.event.get(): 
+        # Hvis programvinduet lukkes, avsluttes løkken
         if event.type == pygame.QUIT:
             kjører = False
 
+     # Tegner spillebrettet
     tegnBrett()
+
+    # Oppdaterer skjermen for å vise endringer
     pygame.display.flip()
 
+# Når løkken er ferdig, avsluttes pygame
 pygame.quit() 
