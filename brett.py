@@ -1,1 +1,1 @@
-print("Hallo")
+import pygame as pg
