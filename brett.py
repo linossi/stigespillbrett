@@ -16,42 +16,39 @@ ROD = (255, 0, 0)
 GRONN = (0, 255, 0)
 MULBERRY = (197, 75, 140)
 
-# Opprett vindu
+# Opprett vindu og sett tittel
 skjerm = pygame.display.set_mode((BREDDE, HOYDE))
 pygame.display.set_caption("Stigespill")
 
-# Font
+# Fonter for tall og tekst
 tallFont = pygame.font.Font(None, 24)
 tekstFont = pygame.font.Font(None, 19)
 
 # Tegner brettet
 def tegnBrett(): 
-    skjerm.fill(HVIT)
+    skjerm.fill(HVIT) 
     
     # Tegn rutenett og nummer
     for rad in range(RADER):
         for kol in range(KOLONNER):
-            rect = pygame.Rect(kol * RUTESTORRELSE, rad * RUTESTORRELSE, RUTESTORRELSE, RUTESTORRELSE)
-            pygame.draw.rect(skjerm, SVART, rect, 1)
+            rect = pygame.Rect(kol * RUTESTORRELSE, rad * RUTESTORRELSE, RUTESTORRELSE, RUTESTORRELSE) # Rect lager en rektangel
+            pygame.draw.rect(skjerm, SVART, rect, 1) # Tegner rektangel
 
             # Rutenummer 
-            # render er en funksjon som lager en tekst
-            # blit er en funksjon som tegner teksten på skjermen
-            rutenummer = (RADER - 1 - rad) * KOLONNER + (kol + 1)
-            tekst = tallFont.render(str(rutenummer), True, SVART)
-            skjerm.blit(tekst, (kol * RUTESTORRELSE + 5, rad * RUTESTORRELSE + 5))
+            rutenummer = (RADER - 1 - rad) * KOLONNER + (kol + 1) # Formel for å regne ut rutenummer
+            tekst = tallFont.render(str(rutenummer), True, SVART) # Lager tekst
+            skjerm.blit(tekst, (kol * RUTESTORRELSE + 5, rad * RUTESTORRELSE + 5)) # Tegner tekst
 
     # Markér start (rute 1) og mål (rute 100)
-    # rect lager en rektangel
-    pygame.draw.rect(skjerm, MULBERRY, (0, (RADER-1) * RUTESTORRELSE, RUTESTORRELSE, RUTESTORRELSE))
-    pygame.draw.rect(skjerm, MULBERRY, ((KOLONNER-1) * RUTESTORRELSE, 0, RUTESTORRELSE, RUTESTORRELSE))
+    pygame.draw.rect(skjerm, MULBERRY, (0, (RADER-1) * RUTESTORRELSE, RUTESTORRELSE, RUTESTORRELSE)) # Tegner rektangel
+    pygame.draw.rect(skjerm, MULBERRY, ((KOLONNER-1) * RUTESTORRELSE, 0, RUTESTORRELSE, RUTESTORRELSE)) # Tegner rektangel
 
     # Skriv "START" og "SLUTT"
-    startTekst = tekstFont.render("START", True, SVART) 
-    skjerm.blit(startTekst, (5, (RADER-1) * RUTESTORRELSE + 20))
+    startTekst = tekstFont.render("START", True, SVART) # 
+    skjerm.blit(startTekst, (5, (RADER-1) * RUTESTORRELSE + 20)) # 
 
-    sluttTekst = tekstFont.render("SLUTT", True, SVART)
-    skjerm.blit(sluttTekst, ((KOLONNER-1) * RUTESTORRELSE + 5, 20))
+    sluttTekst = tekstFont.render("SLUTT", True, SVART) # 
+    skjerm.blit(sluttTekst, ((KOLONNER-1) * RUTESTORRELSE + 5, 20)) #
 
     # Tegn stiger (grønne linjer)
     pygame.draw.line(skjerm, GRONN, (50, 400), (150, 300), 5)   
@@ -67,7 +64,7 @@ def tegnBrett():
 # Hovedløkke
 kjører = True
 while kjører:
-    for event in pygame.event.get():
+    for event in pygame.event.get(): 
         if event.type == pygame.QUIT:
             kjører = False
 
