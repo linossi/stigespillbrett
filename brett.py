@@ -2,8 +2,8 @@ import pygame as pg
 
 pg.init()
 
-BRETTBREDDE = 800
-BRETTHOYDE = 800
+BRETTBREDDE = 700
+BRETTHOYDE = 700
 
 vindu = pg.display.set_mode([BRETTBREDDE, BRETTHOYDE])
 
