@@ -36,6 +36,8 @@ def tegnBrett():
             pygame.draw.rect(skjerm, SVART, rect, 1)
 
             # Rutenummer 
+            # render er en funksjon som lager en tekst
+            # blit er en funksjon som tegner teksten på skjermen
             rutenummer = (RADER - 1 - rad) * KOLONNER + (kol + 1)
             tekst = tallFont.render(str(rutenummer), True, SVART)
             skjerm.blit(tekst, (kol * RUTESTORRELSE + 5, rad * RUTESTORRELSE + 5))
@@ -45,7 +47,7 @@ def tegnBrett():
     pygame.draw.rect(skjerm, MULBERRY, ((KOLONNER-1) * RUTESTORRELSE, 0, RUTESTORRELSE, RUTESTORRELSE))
 
     # Skriv "START" og "SLUTT"
-    startTekst = tekstFont.render("START", True, SVART)
+    startTekst = tekstFont.render("START", True, SVART) 
     skjerm.blit(startTekst, (5, (RADER-1) * RUTESTORRELSE + 20))
 
     sluttTekst = tekstFont.render("SLUTT", True, SVART)
@@ -70,6 +72,5 @@ while kjører:
             kjører = False
 
     tegnBrett()
-    pygame.display.flip()
 
-pygame.quit()
+pygame.quit() 
