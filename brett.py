@@ -25,7 +25,8 @@ pygame.display.set_caption("Stigespill")
 tallFont = pygame.font.Font(None, 24)
 tekstFont = pygame.font.Font(None, 19)
 
-def tegnBrett():
+# Tegner brettet
+def tegnBrett(): 
     skjerm.fill(HVIT)
     
     # Tegn rutenett og nummer
@@ -34,7 +35,7 @@ def tegnBrett():
             rect = pygame.Rect(kol * RUTESTORRELSE, rad * RUTESTORRELSE, RUTESTORRELSE, RUTESTORRELSE)
             pygame.draw.rect(skjerm, SVART, rect, 1)
 
-            # Rutenummer
+            # Rutenummer 
             rutenummer = (RADER - 1 - rad) * KOLONNER + (kol + 1)
             tekst = tallFont.render(str(rutenummer), True, SVART)
             skjerm.blit(tekst, (kol * RUTESTORRELSE + 5, rad * RUTESTORRELSE + 5))
