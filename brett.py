@@ -2,5 +2,8 @@ import pygame as pg
 
 pg.init()
 
-brettBredde = 10
-brettHoeyde = 10
+BRETTBREDDE = 10
+BRETTHOYDE = 10
+
+vindu = pg.display.set_mode([BRETTBREDDE, BRETTHOYDE])
+
